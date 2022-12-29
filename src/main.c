@@ -184,7 +184,7 @@ int check_point_values(int matrix[map_size_rows][map_size_cols], int point_x, in
 
 int main() {
     int test_main_display = 1;
-    
+    int test_main_path = 1;
     int start = 1; //start point
     int start_x = 0; //vertical
     int start_y = 0; //horisontal
@@ -211,5 +211,41 @@ int main() {
     }
     
     if(test_main_display) show_matrix(ind);
+    
+    //path finding
+    /*
+     from goal to start we can use any way...
+     go and show x,y, number
+     */
+  
+    int point_down = goal_x; int point_right = goal_y;
+    
+    if(test_main_path) printf(" FROM x horisontal = %d, vertical y = %d \n", point_down, point_right);
+    
+    int returned_index = check_point_values(ind, point_down, point_right); //return one index to go
+    int next_x = get_x(returned_index);
+    int next_y = get_y(returned_index);
+    
+    if(test_main_path) printf("point%2d,",ind[point_down][point_right]);
+    if(test_main_path) printf(" next x:%d, y:%d ", next_x, next_y);
+    int value = ind[next_x][next_y];
+    if(test_main_path) printf("%2d[%d]\n", value, returned_index);
+
+    int filling_path_with = 1;
+//    for(int count = 0; count < 1; count++){
+    while(value != start){
+        point_down = next_y; point_right = next_x; //get new position
+//        path[point_down][point_right] = filling_path_with;
+        update_matrix_with(path, point_down, point_right, filling_path_with); //encoding path
+//        if(test_main) printf(" poit_down  = %d, poit_down = %d \n", point_down, point_right);
+        returned_index = check_point_values(ind, point_down, point_right); //return one index to go
+         next_x = get_x(returned_index);
+         next_y = get_y(returned_index);
+        if(test_main_path) printf("point%2d,",ind[point_down][point_right]);
+        if(test_main_path) printf(" next x:%d, y:%d ", next_x, next_y);
+        value = ind[next_x][next_y];
+        if(test_main_path) printf("%2d[%d]\n", value, returned_index);
+    }
+    
     return 0;
 }
