@@ -138,44 +138,8 @@ int update_matrix_with(int matrix[map_size_rows][map_size_cols], int x, int y, i
 }
  
 void insert_obstcls(int ind[map_size_rows][map_size_cols], int obst){
-    //without test no obstcls
-    int test_1 = 0; //if we run test put test = 1
-    int test_2 = 1; //if we run test put test = 1
- 
-    if(test_1){
-//        update_matrix_with(ind, 1, 1, OBST);
-//        update_matrix_with(ind, 1, 2, OBST);
-    }
- 
-    if(test_2){
-//        update_matrix_with(ind, 1, 0, OBST); //doesnt find path if put this
-//        update_matrix_with(ind, 1, 1, OBST);
-//        update_matrix_with(ind, 1, 2, OBST);
-//        update_matrix_with(ind, 1, 3, OBST);
-//        update_matrix_with(ind, 1, 3, OBST);
- 
-//        update_matrix_with(ind, 2, 2, OBST);
-//        update_matrix_with(ind, 2, 3, OBST);
-    //    update_matrix_with(ind, 3, 0, OBST);
-//        update_matrix_with(ind, 3, 1, OBST);
-//        update_matrix_with(ind, 3, 2, OBST);
-//        update_matrix_with(ind, 3, 3, OBST);
-    //    update_matrix_with(ind, 3, 7, OBST);
-//        update_matrix_with(ind, 4, 1, OBST);
-//        update_matrix_with(ind, 4, 2, OBST);
-//        update_matrix_with(ind, 4, 3, OBST);
-//        update_matrix_with(ind, 4, 4, OBST);
-//        update_matrix_with(ind, 4, 5, OBST);
-//        update_matrix_with(ind, 5, 5, OBST);
-//        update_matrix_with(ind, 5, 6, OBST);
-//        update_matrix_with(ind, 6, 0, OBST);
-//        update_matrix_with(ind, 6, 4, OBST);
-//        update_matrix_with(ind, 6, 6, OBST);
-//        update_matrix_with(ind, 6, 7, OBST);
-//        update_matrix_with(ind, 7, 1, OBST);
-//        update_matrix_with(ind, 7, 4, OBST);
-//        update_matrix_with(ind, 7, 6, OBST);
-    }
+    update_matrix_with(ind, 1, 1, OBST);
+    update_matrix_with(ind, 1, 2, OBST);
 }
  
 void ind_first_line(void) {
