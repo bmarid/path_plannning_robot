@@ -31,7 +31,6 @@ int echoPin = 10; // Echo
 long duration, cm;
 //---------------------HALA car-----------------------keep
  
-bool findObstecal = false;
 int goal = 0;
  
 // 0 is up
@@ -462,318 +461,333 @@ void setup() {
  
 }
  
+
 /**
-  turns on the motors to go forward.
- 
-  @param colorCode color code to convert.
-  @return the numerical value of the color code.
+  turns on the motors to go forward and calculate the current indexes after moving.
+
+  @param None.
+  @return None.
 */
- 
+
 void forward() {
- 
-  // Turn on motor B and A to go forward
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
- 
-  // Set the  speed value out of possible range 0~255
-  analogWrite(enB, 200);
-  analogWrite(enA, 182);
-  delay(1800);
- 
-  Serial.println("Forward");
- 
-  //Change the indexs on the path matrix after the robot move
-  if (direction == 0)
-      j = j - 1;
-  if (direction == 1)
-      i = i + 1;
-  if (direction == 2)
-      j = j + 1;
-  if (direction == 3)
-      i = i - 1;
+
+    // Turn on motor B and A to go forward
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2, LOW);
+    digitalWrite(in3, HIGH);
+    digitalWrite(in4, LOW);
+
+    // Set the  speed value out of possible range 0~255
+    analogWrite(enB, 200);
+    analogWrite(enA, 182);
+    delay(1800);
+
+    Serial.println("Forward");
+
+    //Change the indexs on the path matrix after the robot move
+    if (direction == 0)
+        j = j - 1;
+    if (direction == 1)
+        i = i + 1;
+    if (direction == 2)
+        j = j + 1;
+    if (direction == 3)
+        i = i - 1;
 }
- 
- 
+
+
 /**
-  Converts a color code to its numerical value.
- 
-  @param colorCode color code to convert.
-  @return the numerical value of the color code.
+  turns on the motors to turn to the left and change the current direction after moving.
+
+  @param None.
+  @return None.
 */
- 
+
 void left() {
- 
-  // Turn on motor B and A to turn to the left
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, HIGH);
- 
-  delay(170);
-  Serial.println("Left");
- 
-  // Change the direction of the robot after it turn left
-  if (direction == 0)
-      direction = 3;
-  else if (direction == 1)
-      direction = 0;
-  else if (direction == 2)
-      direction = 1;
-  else if (direction == 3)
-      direction = 2;
- 
+
+    // Turn on motor B and A to turn to the left
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2, LOW);
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, HIGH);
+
+    delay(170);
+    Serial.println("Left");
+
+    // Change the direction of the robot after it turn left
+    if (direction == 0)
+        direction = 3;
+    else if (direction == 1)
+        direction = 0;
+    else if (direction == 2)
+        direction = 1;
+    else if (direction == 3)
+        direction = 2;
+
 }
- 
+
 /**
-  Converts a color code to its numerical value.
- 
-  @param colorCode color code to convert.
-  @return the numerical value of the color code.
+  turns on the motors to turn to the right and change the current direction after moving.
+
+  @param None.
+  @return None.
 */
- 
+
 void right() {
- 
-  // Turn on motor B and A to turn to the right
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
-  //analogWrite(enB, 200);
-   // analogWrite(enA, 200);
-  delay(200);
-  Serial.println("Right");
- 
-  if (direction == 0)
-      direction = 1;
-  else if (direction == 1)
-      direction = 2;
-  else if (direction == 2)
-      direction = 3;
-  else if (direction == 3)
-      direction = 0;
+
+    // Turn on motor B and A to turn to the right
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, HIGH);
+    digitalWrite(in3, HIGH);
+    digitalWrite(in4, LOW);
+    //analogWrite(enB, 200);
+     // analogWrite(enA, 200);
+    delay(200);
+    Serial.println("Right");
+
+    if (direction == 0)
+        direction = 1;
+    else if (direction == 1)
+        direction = 2;
+    else if (direction == 2)
+        direction = 3;
+    else if (direction == 3)
+        direction = 0;
 }
- 
+
 /**
-  Converts a color code to its numerical value.
- 
-  @param colorCode color code to convert.
-  @return the numerical value of the color code.
+  turns off the motors for 2 secondes.
+
+  @param None.
+  @return None.
 */
 void stop_robot() {
-  if(test_arduino) pr_s("stop_robot"); ln();
-  //Stop the motors
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, LOW);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, LOW);
-  delay(2000);
+    if (test_arduino) pr_s("stop_robot"); ln();
+    //Stop the motors
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, LOW);
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, LOW);
+    delay(2000);
 }
- 
-//must test and see how it works--------------------
+
 /**
-  Converts a color code to its numerical value.
- 
-  @param colorCode color code to convert.
-  @return the numerical value of the color code.
+  turns on the motors to turn 180 degree and change the current direction after moving.
+
+  @param None.
+  @return None.
 */
 void turn180() {
- 
-  Serial.println("Around");
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, HIGH);
-  analogWrite(enB, 200);
-  analogWrite(enA, 175);
-  delay(500);
-  if (direction == 0)
-      direction = 2;
-  else if (direction == 1)
-      direction = 3;
-  else if (direction == 2)
-      direction = 0;
-  else if (direction == 3)
-      direction = 1;
- 
- 
+
+    Serial.println("Around");
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2, LOW);
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, HIGH);
+    analogWrite(enB, 200);
+    analogWrite(enA, 175);
+    delay(500);
+    if (direction == 0)
+        direction = 2;
+    else if (direction == 1)
+        direction = 3;
+    else if (direction == 2)
+        direction = 0;
+    else if (direction == 3)
+        direction = 1;
+
+
 }
 /**
   Calculate the distance in the front of the robot.
- 
+
   @param None.
   @return a the distance in cm.
 */
-long calcDistance() {/////most change the comments---------------------------------
- 
-  // The sensor is triggered by a HIGH pulse of 10 or more microseconds.
-  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(5);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
- 
-  // Read the signal from the sensor: a HIGH pulse whose
-  // duration is the time (in microseconds) from the sending
-  // of the ping to the reception of its echo off of an object.
-  pinMode(echoPin, INPUT);
-  duration = pulseIn(echoPin, HIGH);
- 
-  // Convert the time into a distance
-  cm = (duration / 2) / 29.1;     // Divide by 29.1 or multiply by 0.0343
- 
-  Serial.print(cm);
-  Serial.print("cm");
-  Serial.println();
-  delay(300);
- 
-  return cm;
+long calcDistance() {
+
+    // The sensor is triggered by a HIGH pulse of 10 or more microseconds.
+    // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
+    digitalWrite(trigPin, LOW);
+    delayMicroseconds(5);
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin, LOW);
+
+    // Read the signal from the sensor: a HIGH pulse whose
+    // duration is the time (in microseconds) from the sending
+    // of the ping to the reception of its echo off of an object.
+    pinMode(echoPin, INPUT);
+    duration = pulseIn(echoPin, HIGH);
+
+    // Convert the time into a distance
+    cm = (duration / 2) / 29.1;     // Divide by 29.1 or multiply by 0.0343
+
+    Serial.print(cm);
+    Serial.print("cm");
+    Serial.println();
+    delay(300);
+
+    return cm;
 }
- 
- 
-int test_front() {
-  if (direction == 0) {
-      return path[j - 1][i];
-  }
-  if (direction == 1) {
-      return path[j][i + 1];
-  }
-  if (direction == 2) {
-      return path[j + 1][i];
-  }
-  if (direction == 3) {
-      return path[j][i - 1];
-  }
-}
+/**
+  calulate the J index of the obstecal.
+
+  @param None.
+  @return the value of J index .
+*/
 int return_indexJ() {
-  if (direction == 0) {
-      return j - 1;
-  }
-  if (direction == 1 || direction == 3) {
-      return j;
-  }
-  if (direction == 2) {
-      return j + 1;
-  }
-    
+    if (direction == 0) {
+        return j - 1;
+    }
+    if (direction == 1 || direction == 3) {
+        return j;
+    }
+    if (direction == 2) {
+        return j + 1;
+    }
 }
+
+/**
+  calulate the i index of the obstecal.
+
+  @param None.
+  @return the value of i index .
+*/
 int return_indexI() {
-  if (direction == 0 || direction == 2) {
-      return i;
-  }
-  if (direction == 1) {
-      return i + 1;
-  }
-   
-  if (direction == 3) {
-      return i - 1;
-  }
+    if (direction == 0 || direction == 2) {
+        return i;
+    }
+    if (direction == 1) {
+        return i + 1;
+    }
+
+    if (direction == 3) {
+        return i - 1;
+    }
 }
- 
- 
- 
+
 /**
-  Gets the number on the Grid of the space to the Right of it.
- 
+  test front of the robot due to the path matrix depending on the direction.
+
   @param None.
-  @return the vlaue of the grid.
+  @return the value of the matrix for the front.
 */
-int test_right() {
-  if (direction == 0) {
-      return path[j][i + 1];
-  }
-  if (direction == 1) {
-      return path[j + 1][i];
-  }
-  if (direction == 2) {
-      return path[j][i - 1];
-  }
-  if (direction == 3) {
-      return path[j - 1][i];
-  }
+int testFront() {
+    if (direction == 0) {
+        return path[j - 1][i];
+    }
+    if (direction == 1) {
+        return path[j][i + 1];
+    }
+    if (direction == 2) {
+        return path[j + 1][i];
+    }
+    if (direction == 3) {
+        return path[j][i - 1];
+    }
 }
- 
- 
- 
+
+
 /**
-  Gets the number on the Grid of the Space to the Left of it.
- 
+  test the right of the robot due to the path matrix depending on the direction.
+
   @param None.
-  @return the vlaue of the grid.
+  @return the value of the matrix to the right.
 */
-int test_left() {
-  if (direction == 0) {
-      return path[j][i - 1];
-  }
-  if (direction == 1) {
-      return path[j - 1][i];
-  }
-  if (direction == 2) {
-      return path[j][i + 1];
-  }
-  if (direction == 3) {
-      return path[j + 1][i];
-  }
+int testRight() {
+    if (direction == 0) {
+        return path[j][i + 1];
+    }
+    if (direction == 1) {
+        return path[j + 1][i];
+    }
+    if (direction == 2) {
+        return path[j][i - 1];
+    }
+    if (direction == 3) {
+        return path[j - 1][i];
+    }
 }
- 
- 
+
+
+
 /**
-  Gets the number on the Grid of the Space to the Left of it.
- 
+  test the left of the robot due to the path matrix depending on the direction.
+
   @param None.
-  @return 1 if the front of the robot is closed due to the grid and the vaue of the grid if the front is open.
+  @return the value of the matrix to the left.
+*/
+int testLeft() {
+    if (direction == 0) {
+        return path[j][i - 1];
+    }
+    if (direction == 1) {
+        return path[j - 1][i];
+    }
+    if (direction == 2) {
+        return path[j][i + 1];
+    }
+    if (direction == 3) {
+        return path[j + 1][i];
+    }
+}
+
+
+/**
+  return the value of the matrix so we can now if we can go oe not.
+
+  @param None.
+  @return 1 if the front of the robot is closed due to the grid and the value of the grid if the front is open(0 or -1).
 */
 int frontOpen() {
-  if(test_arduino) pr_s("frontOpen"); ln();
-  int next = test_front();
-  if (next == 0) {
-      return next;
-  }
-  else if (next == -1) {
-      goal = 1;
-      return next;
-  }
- 
-  else {
-      return 1;
-  }
+    if (test_arduino) pr_s("frontOpen"); ln();
+    int next = testFront();
+    if (next == 0) {
+        return next;
+    }
+    else if (next == -1) {
+        goal = 1;
+        return next;
+    }
+
+    else {
+        return 1;
+    }
 }
- 
+
 /**
-  Gets the number on the Grid of the Space to the Left of it.
- 
+  test if the right is open to turn to it or not.
+
   @param None.
-  @return True if the right of the robot is Open (free) due to the grid and False if it is closed.
+  @return True or False.
 */
 boolean rightOpen() {
-  if(test_arduino) pr_s("rightOpen"); ln();
-  int next = test_right();
-  if (next == 0 || next == -1) {
-      return true;
-  }
-  else {
-      return false;
-  }
+    if (test_arduino) pr_s("rightOpen"); ln();
+    int next = testRight();
+    if (next == 0 || next == -1) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
- 
+
 /**
-  Gets the number on the Grid of the Space to the Left of it.
- 
+  test if the left is open to turn to it or not.
+
   @param None.
-  @return True if the left of the robot is Open (free) due to the grid and False if it is closed.
+  @return True or False.
 */
 boolean leftOpen() {
-  int next = test_left();
-  if (next == 0 || next == -1) {
-      return true;
-  }
-  else {
-      return false;
-  }
+    int next = testLeft();
+    if (next == 0 || next == -1) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
- 
 void set_obstecal() {
   int y = (map_size_rows - 1) - return_indexI();
   int x = (map_size_cols - 1) - return_indexJ();
@@ -821,8 +835,6 @@ void loop() {
 //      show_matrix(ind);
       pr_s("-------New ind"); ln();
       
-  //recalc path----------------------------------------------
-//we will do 2 test
 //      left();
 //
 //          if (rightOpen() == true) {
