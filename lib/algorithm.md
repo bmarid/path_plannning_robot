@@ -44,6 +44,11 @@ the final destination
 
 - The path will be returned taken into account the parents of the nodes. The path is calculated backwards, starting with the end point and tracing back the parents accordingly.
 
+## Flowchart of A* algorithm
+
+ ![image](https://user-images.githubusercontent.com/113441374/210694023-ff1081c1-a971-48b0-8659-01b11a468859.png)
+
+
 ## Movment
 ### General Algorithm of movment
 
