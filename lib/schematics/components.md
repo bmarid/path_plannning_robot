@@ -11,11 +11,7 @@
 
 - L298N Dual H-bridge.
 
- ![WhatsApp Image 2023-01-05 at 01 37 35](https://user-images.githubusercontent.com/113441374/210687385-5049df1c-fcc2-4897-a26f-d9967234783a.jpg)
-
 - HC-SR04 Ultrasonic sensor.
-
--![image](https://user-images.githubusercontent.com/113441374/210687521-3c817b4a-63ce-42c1-9e1f-4768c114eff3.png)
 
 - 2 DC motors.
 
@@ -34,20 +30,25 @@
 
   - ### L298N Dual H-bridge
   
+  ![WhatsApp Image 2023-01-05 at 01 37 36](https://user-images.githubusercontent.com/113441374/210739374-1c4d257d-d582-4194-8653-66b8e8871443.jpg)
+  
   An H-bridge is a simple circuit that lets you control a DC motor to go backward or forward.
   
 Changing the polarity of the power supply to DC motor is used to change the direction of rotation.
 Apart from changing the rotation direction, the H-bridge can provide additional operation modes, "brake" and "free run until frictional stop". The H-bridge arrangement is generally used to reverse the polarity/direction of the motor, but can also be used to 'brake' the motor, where the motor comes to a sudden stop, as the motor's terminals are shorted
 
   - ### HC-SR04 Ultrasonic sensor
-    Ultrasonic sensors work by emitting sound waves at a frequency too high for humans to hear. then wait for the sound to be reflected back, calculating distance based on the     time required. 
+
+![image](https://user-images.githubusercontent.com/113441374/210739285-c5b838a6-2a18-4c3e-858f-190f58706721.png)
+
+   Ultrasonic sensors work by emitting sound waves at a frequency too high for humans to hear. then wait for the sound to be reflected back, calculating distance based on the     time required. 
     calculated based on this formula: Distance = ½ T x C
     
-    T = Time and C = the speed of sound
+   T = Time and C = the speed of sound
     
-    ![WhatsApp Image 2023-01-05 at 01 28 59](https://user-images.githubusercontent.com/113441374/210690752-99c998a2-366d-4235-aff9-a494c9369873.jpg)
+  ![WhatsApp Image 2023-01-05 at 01 28 59](https://user-images.githubusercontent.com/113441374/210690752-99c998a2-366d-4235-aff9-a494c9369873.jpg)
     
-    ![WhatsApp Image 2023-01-05 at 01 29 23](https://user-images.githubusercontent.com/113441374/210690803-d6ab0ac6-a0ac-416a-95bb-29af6868a3ea.jpg)
+  ![WhatsApp Image 2023-01-05 at 01 29 23](https://user-images.githubusercontent.com/113441374/210690803-d6ab0ac6-a0ac-416a-95bb-29af6868a3ea.jpg)
 
 
   
