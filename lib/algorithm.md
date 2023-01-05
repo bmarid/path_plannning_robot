@@ -1,1 +1,2 @@
-algorithm
+# Algorithm
+## How it works
