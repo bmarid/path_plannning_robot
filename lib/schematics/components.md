@@ -1,5 +1,6 @@
 # Circuit and Schematics
 ## 1. Circuit 
+![Copy of H-bridge motor driver](https://user-images.githubusercontent.com/113441374/210682973-18f31141-829d-4f7e-8ea8-1e3abdd9150d.png)
 
 
 ## 2. Components
