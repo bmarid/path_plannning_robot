@@ -5,11 +5,31 @@
 
 ## 2. Components
 - Arduino Uno.
+
+![image](https://user-images.githubusercontent.com/113441374/210687728-327f0895-2ed0-4d82-b56c-b8b7f33a53a9.png)
+
+
 - L298N Dual H-bridge.
+
+ ![WhatsApp Image 2023-01-05 at 01 37 35](https://user-images.githubusercontent.com/113441374/210687385-5049df1c-fcc2-4897-a26f-d9967234783a.jpg)
+
 - HC-SR04 Ultrasonic sensor.
+
+-![image](https://user-images.githubusercontent.com/113441374/210687521-3c817b4a-63ce-42c1-9e1f-4768c114eff3.png)
+
 - 2 DC motors.
+
+![image](https://user-images.githubusercontent.com/113441374/210687852-0bfac715-8339-416a-8b22-6e41a906753c.png)
+
 - Battery 6v.
+
+![image](https://user-images.githubusercontent.com/113441374/210688150-caf0acda-b1c5-4c2b-9200-30cf57a4ed8c.png)
+
+
 - BreadBoard.
+
+![image](https://user-images.githubusercontent.com/113441374/210687993-6f0da085-5ee1-4233-a764-671feb3f4a3c.png)
+
 - Wires.
 
   - ### L298N Dual H-bridge
