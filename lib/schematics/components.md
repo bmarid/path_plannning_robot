@@ -23,7 +23,8 @@
 
 - Battery 6v.
 
-![image](https://user-images.githubusercontent.com/113441374/210687921-12af7cc9-90c6-4acd-a5a9-e550838c9ac2.png)
+![image](https://user-images.githubusercontent.com/113441374/210688150-caf0acda-b1c5-4c2b-9200-30cf57a4ed8c.png)
+
 
 - BreadBoard.
 
