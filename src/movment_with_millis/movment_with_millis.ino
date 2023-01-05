@@ -14,7 +14,7 @@ int in4 = 4;
 int trigPin = 11; // Trigger
 int echoPin = 10; // Echo
 long duration, cm;
- 
+// 0 is up 
 // 1 is right
 // 2 is down
 // 3 is left

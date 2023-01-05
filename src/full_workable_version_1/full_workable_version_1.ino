@@ -561,7 +561,7 @@ void right() {
   @param None.
   @return None.
 */
-void stop_robot() {
+void stopRobot() {
     if (test_arduino) pr_s("stop_robot"); ln();
     //Stop the motors
     digitalWrite(in1, LOW);
@@ -636,7 +636,7 @@ long calcDistance() {
   @param None.
   @return the value of J index .
 */
-int return_indexJ() {
+int returnIndexJ() {
     if (direction == 0) {
         return j - 1;
     }
@@ -654,7 +654,7 @@ int return_indexJ() {
   @param None.
   @return the value of i index .
 */
-int return_indexI() {
+int returnIndexI() {
     if (direction == 0 || direction == 2) {
         return i;
     }
@@ -789,8 +789,8 @@ boolean leftOpen() {
     }
 }
 void set_obstecal() {
-  int y = (map_size_rows - 1) - return_indexI();
-  int x = (map_size_cols - 1) - return_indexJ();
+  int y = (map_size_rows - 1) - returnIndexI();
+  int x = (map_size_cols - 1) - returnIndexJ();
   pr_s("x=");pr(x);pr_s("y="); pr(y); ln();
   ind[y][x] = OBST;
   pr_s("!! = "); pr(ind[y][x]); ln();
@@ -818,7 +818,7 @@ void loop() {
   }
   if (calcDistance() < 35) {
       calc_matrix_wave = 1; // we can recalc path
-      stop_robot();
+      stopRobot();
       clean_path();
 //      set_obstecal();
  int y = (map_size_rows - 1) - return_indexI();
