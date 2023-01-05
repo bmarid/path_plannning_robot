@@ -7,5 +7,9 @@ https://dronebotworkshop.com/dc-motors-l298n-h-bridge/
 https://www.maxbotix.com/articles/how-ultrasonic-sensors-work.htm
 
 ### A* Algorithm
+https://www.youtube.com/watch?v=-L-WgKMFuhE&t=331s
 
+https://www.youtube.com/watch?v=6TsL96NAZCo
+
+https://www.geeksforgeeks.org/a-search-algorithm/
 
