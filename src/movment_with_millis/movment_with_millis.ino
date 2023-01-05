@@ -222,7 +222,7 @@ void turn180() {
   @param None.
   @return None.
 */
-void stop_robot() {
+void stopRobot() {
   //Stop the motors
   digitalWrite(in1, LOW);
   digitalWrite(in2, LOW);
@@ -272,7 +272,7 @@ long calcDistance() {/////most change the comments------------------------------
   @param None.
   @return the value of the matrix for the front.
 */
-int test_front() {
+int testFront() {
   if (direction == 0) {
       return path[j - 1][i];
   }
@@ -293,7 +293,7 @@ int test_front() {
   @param None.
   @return the value of the matrix for the right.
 */
-int test_right() {
+int testRight() {
   if (direction == 0) {
       return path[j][i + 1];
   }
@@ -314,7 +314,7 @@ int test_right() {
   @param None.
   @return the value of the matrix for the left.
 */
-int test_left() {
+int testLeft() {
   if (direction == 0) {
       return path[j][i - 1];
   }
@@ -337,7 +337,7 @@ int test_left() {
   @return 1 if the front of the robot is closed due to the grid and the value of the grid if the front is open(0 or -1)
 */
 int frontOpen() {
-  int next = test_front();
+  int next = testFront();
   if (next == 0) {
       return next;
   }
@@ -358,7 +358,7 @@ int frontOpen() {
   @return return True or False.
 */
 boolean rightOpen() {
-  int next = test_right();
+  int next = testRight();
   if (next == 0 || next == -1) {
       return true;
   }
@@ -373,7 +373,7 @@ boolean rightOpen() {
   @return return True or False.
 */
 boolean leftOpen() {
-  int next = test_left();
+  int next = testLeft();
   if (next == 0 || next == -1) {
       return true;
   }
@@ -382,15 +382,71 @@ boolean leftOpen() {
   }
 }
  
-void set_obstecal() {
+void setObstecal() {
   path[i][j] = 1;
   //recalc
 }
- 
+
+/**
+  calulate the J index of the Robot.
+  @param None.
+  @return the value of J index .
+*/
+int getRobotX(){
+  return j;
+  }
+
+/**
+  calulate the I index of the Robot.
+  @param None.
+  @return the value of J index .
+*/
+int getRobotY(){
+  return i;
+  }
+  
+/**
+  calulate the J index of the obstecal.
+  @param None.
+  @return the value of J index .
+*/
+int getObstecalX() {
+    if (direction == 0) {
+        return j - 1;
+    }
+    if (direction == 1 || direction == 3) {
+        return j;
+    }
+    if (direction == 2) {
+        return j + 1;
+    }
+}
+
+/**
+  calulate the i index of the obstecal.
+  @param None.
+  @return the value of i index .
+*/  
+int getObstecalY(){
+   if (direction == 0 || direction == 2) {
+        return i;
+    }
+    if (direction == 1) {
+        return i + 1;
+    }
+
+    if (direction == 3) {
+        return i - 1;
+    }
+  }
+
+
+
+
 void loop() {
   if (calcDistance() < 35) {
-      stop_robot();
-      set_obstecal();
+      stopRobot();
+      setObstecal();
       if (rightOpen() == true) {
           right();
       }
