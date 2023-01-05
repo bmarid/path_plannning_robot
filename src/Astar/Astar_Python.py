@@ -1,13 +1,5 @@
-#Noi avem ca input aceasta matrice care are pozitiile pentru
-#nodurile de start si de end
-#Stim de asemenea care sunt pozitiile la obstacole
 
-#Entry - maze
-#Stim x, y pentru start node
-#Stim x, y pentru end node
-
-#Noi trebuie sa output un path care sa fie compus din x,y pentru fiecare
-# nod care compune path-ul
+#A* algorithm
 
 #We store all the children to be evaluated
 open_list=[]
@@ -43,6 +35,7 @@ def astar(maze):
     open_list.append(current)
     closed_list.append(current)
 
+    #A list to store the final path
     path = []
     counter = 0
 
