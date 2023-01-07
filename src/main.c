@@ -1,19 +1,18 @@
 #include <stdio.h>
-#define D 4 //dimention
-#define OBST 99
+#define DIMENTION 4 //UP LEFT RIGHT DOWN
+#define OBSTACLE 99
 #define beautiful_output 1 //beautiful output
-//
+
 //Test 1 normal 8 8
-#define map_size_rows 8
-#define map_size_cols 8
+#define NUM_ROWS 8
+#define NUM_COLUMNS 8
 
 #define size_map 64
-int open_list[size_map][map_size_cols];
+int open_list[size_map][NUM_COLUMNS];
 int wave = 1;
 int wave_index = 0;
 
-
-int ind[map_size_rows][map_size_cols] = {
+int ind[NUM_ROWS][NUM_COLUMNS] = {
     {-1, -1, -1, -1, -1, -1, -1, -1},
     {-1, -1, -1, -1, -1, -1, -1, -1},
     {-1, -1, -1, -1, -1, -1, -1, -1},
@@ -24,7 +23,7 @@ int ind[map_size_rows][map_size_cols] = {
     {-1, -1, -1, -1, -1, -1, -1, -1}
 };
 
-int path[map_size_rows][map_size_cols] = {
+int path[NUM_ROWS][NUM_COLUMNS] = {
     {0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0},
@@ -36,17 +35,17 @@ int path[map_size_rows][map_size_cols] = {
 };
 
 //Test 2 normal 4
-//#define map_size_rows 4
-//#define map_size_cols 4
+//#define NUM_ROWS 4
+//#define NUM_COLUMNS 4
 ////
-//int ind[map_size_rows][map_size_cols] = {
+//int ind[NUM_ROWS][NUM_COLUMNS] = {
 //    {-1, -1, -1, -1},
 //    {-1, -1, -1, -1},
 //    {-1, -1, -1, -1},
 //    {-1, -1,  -1, -1}
 //};
 //
-//int path[map_size_rows][map_size_cols] = {
+//int path[NUM_ROWS][NUM_COLUMNS] = {
 //    {0, 0, 0, 0},
 //    {0, 0, 0, 0},
 //    {0, 0, 0, 0},
@@ -54,11 +53,11 @@ int path[map_size_rows][map_size_cols] = {
 //};
 
 //test 3
-//#define map_size_rows 5
-//#define map_size_cols 4
+//#define NUM_ROWS 5
+//#define NUM_COLUMNS 4
 ////
 //
-//int ind[map_size_rows][map_size_cols] = {
+//int ind[NUM_ROWS][NUM_COLUMNS] = {
 //    {-1, -1, -1, -1},
 //    {-1, -1, -1, -1},
 //    {-1, -1, -1, -1},
@@ -66,7 +65,7 @@ int path[map_size_rows][map_size_cols] = {
 //    {-1, -1, -1, -1}
 //};
 //
-//int path[map_size_rows][map_size_cols] = {
+//int path[NUM_ROWS][NUM_COLUMNS] = {
 //    {0, 0, 0, 0},
 //    {0, 0, 0, 0},
 //    {0, 0, 0, 0},
@@ -82,11 +81,10 @@ int start_x = 0; //vertical
 int start_y = 0; //horisontal
 int start_index = 0;
 
-int goal_target = -1; //TODO: FINALLY REWRITE FOR PATH
-int goal_x = map_size_rows - 1;
-int goal_y = map_size_cols - 1;
+int goal_target = -1;
+int goal_x = NUM_ROWS - 1;
+int goal_y = NUM_COLUMNS - 1;
 int goal_index = 63;
-
 
 int path_max_value = 0;
 int calc_matrix_wave = 1; //bool
@@ -109,9 +107,9 @@ void ln(void) {
 //    Serial.println();
 }
 
-int update_matrix_with(int matrix[map_size_rows][map_size_cols], int x, int y, int new_value) {
+int update_matrix_with(int matrix[NUM_ROWS][NUM_COLUMNS], int x, int y, int new_value) {
     //check if position exist
-    if(x >= 0 && x <= map_size_rows && y >= 0 && y <= map_size_cols) {
+    if(x >= 0 && x <= NUM_ROWS && y >= 0 && y <= NUM_COLUMNS) {
         matrix[x][y] = new_value;
     } else {
         pr_s("Can't update, position doesn't exist");
@@ -122,36 +120,36 @@ int update_matrix_with(int matrix[map_size_rows][map_size_cols], int x, int y, i
 
 int check_point_boundaries(int point_x, int point_y) {
     int result;
-    if (point_x < map_size_rows && point_x >= 0 && point_y < map_size_cols && point_y >= 0) {
+    if (point_x < NUM_ROWS && point_x >= 0 && point_y < NUM_COLUMNS && point_y >= 0) {
         result = 1; //true
     } else result = 0; //false
     return result;
 }
 
 int get_x(int index) {
-    return (index - (index % map_size_cols)) / map_size_cols;
+    return (index - (index % NUM_COLUMNS)) / NUM_COLUMNS;
 }
 
 int get_y(int index) {
-    return index % map_size_cols;
+    return index % NUM_COLUMNS;
 }
 
 int get_index(int x, int y) {
-    int index = x * map_size_cols + y;
+    int index = x * NUM_COLUMNS + y;
     return index;
 }
 
 //get_value_by_index
-int get_v_by_index(int matrix[map_size_rows][map_size_cols], int index) {
+int get_v_by_index(int matrix[NUM_ROWS][NUM_COLUMNS], int index) {
     int x = get_x(index); int y = get_y(index); int value = -1;
     if(check_point_boundaries(x, y)) value = matrix[x][y];
     return value;
 }
 
-int update_matrix_with_ind(int matrix[map_size_rows][map_size_cols], int point_index, int new_value) {
+int update_matrix_with_ind(int matrix[NUM_ROWS][NUM_COLUMNS], int point_index, int new_value) {
     int x = get_x(point_index); int y = get_y(point_index);
     //check if position exist
-    if(x >= 0 && x <= map_size_rows && y >= 0 && y <= map_size_cols) {
+    if(x >= 0 && x <= NUM_ROWS && y >= 0 && y <= NUM_COLUMNS) {
         matrix[x][y] = new_value;
     } else {
         pr_s("Can't update, position doesn't exist");
@@ -160,113 +158,113 @@ int update_matrix_with_ind(int matrix[map_size_rows][map_size_cols], int point_i
     return matrix[x][y];
 }
 
-void insert_obstcls(int ind[map_size_rows][map_size_cols], int obst){
+void insert_obstcls(int ind[NUM_ROWS][NUM_COLUMNS], int obst){
     //without test no obstcls
-    update_matrix_with(ind, 0, 3, OBST);
-    update_matrix_with(ind, 0, 4, OBST);
+    update_matrix_with(ind, 0, 3, OBSTACLE);
+    update_matrix_with(ind, 0, 4, OBSTACLE);
     
-    update_matrix_with(ind, 2, 3, OBST);
-    update_matrix_with(ind, 2, 4, OBST);
-    update_matrix_with(ind, 2, 6, OBST);
+    update_matrix_with(ind, 2, 3, OBSTACLE);
+    update_matrix_with(ind, 2, 4, OBSTACLE);
+    update_matrix_with(ind, 2, 6, OBSTACLE);
     
-    update_matrix_with(ind, 3, 1, OBST);
-    update_matrix_with(ind, 4, 0, OBST);
-    update_matrix_with(ind, 4, 4, OBST);
-    update_matrix_with(ind, 4, 6, OBST);
+    update_matrix_with(ind, 3, 1, OBSTACLE);
+    update_matrix_with(ind, 4, 0, OBSTACLE);
+    update_matrix_with(ind, 4, 4, OBSTACLE);
+    update_matrix_with(ind, 4, 6, OBSTACLE);
     
-    update_matrix_with(ind, 5, 2, OBST);
+    update_matrix_with(ind, 5, 2, OBSTACLE);
     
-    update_matrix_with(ind, 6, 5, OBST);
-    update_matrix_with(ind, 7, 0, OBST);
-    update_matrix_with(ind, 7, 3, OBST);
+    update_matrix_with(ind, 6, 5, OBSTACLE);
+    update_matrix_with(ind, 7, 0, OBSTACLE);
+    update_matrix_with(ind, 7, 3, OBSTACLE);
 }
 
 void ind_first_line(void) {
     pr_s("..");
-    for(int i = 0; i < map_size_cols; i++) {
+    for(int i = 0; i < NUM_COLUMNS; i++) {
         pr(i);
         pr_s(" ");
     }
     ln();
 }
 
-void show_matrix(int matrix[map_size_rows][map_size_cols]) {
+void show_matrix(int matrix[NUM_ROWS][NUM_COLUMNS]) {
     if(beautiful_output) ind_first_line();
-    for(int i = 0; i < map_size_rows; i++){
+    for(int i = 0; i < NUM_ROWS; i++){
         if(beautiful_output) pr(i);
-        for(int j = 0; j < map_size_cols; j++){
+        for(int j = 0; j < NUM_COLUMNS; j++){
             pr(matrix[i][j]);
             pr_s(" ");
         } ln();
     } ln();
 }
 
-void show_matrix_ind(int matrix[map_size_rows][map_size_cols]) {
+void show_matrix_ind(int matrix[NUM_ROWS][NUM_COLUMNS]) {
     if(beautiful_output) ind_first_line();
-    for(int i = 0; i < map_size_rows; i++){
+    for(int i = 0; i < NUM_ROWS; i++){
         if(beautiful_output) pr(i);
-        for(int j = 0; j < map_size_cols; j++){
+        for(int j = 0; j < NUM_COLUMNS; j++){
             pr(matrix[i][j]);
             pr_s("["); pr(get_index(i, j));pr_s("] ");
         } ln();
     } ln();
 }
 
-void show_matrix_revert(int matrix[map_size_rows][map_size_cols]) {
+void show_matrix_revert(int matrix[NUM_ROWS][NUM_COLUMNS]) {
     if(beautiful_output) {
         pr_s(".. ");
-        for(int i = map_size_rows - 1; i >= 0; i--)
+        for(int i = NUM_ROWS - 1; i >= 0; i--)
             pr(i);
         ln();
     }
-    for(int i = map_size_rows - 1; i >= 0; i--) {
+    for(int i = NUM_ROWS - 1; i >= 0; i--) {
         if(beautiful_output) {
             pr(i);
             pr_s(":");
          }
-        for(int j = map_size_rows - 1; j >= 0; j--) {
+        for(int j = NUM_ROWS - 1; j >= 0; j--) {
           pr(matrix[i][j]);
         }
         ln();
     } ln();
 }
 
-void replace_all(int matrix[map_size_rows][map_size_cols], int replace_what, int replace_with) {
-    for(int i=0; i < map_size_rows; i++){
-        for(int j=0; j < map_size_cols; j++){
+void replace_all(int matrix[NUM_ROWS][NUM_COLUMNS], int replace_what, int replace_with) {
+    for(int i=0; i < NUM_ROWS; i++){
+        for(int j=0; j < NUM_COLUMNS; j++){
             if(matrix[i][j] == replace_what) matrix[i][j] = replace_with;
         }
     }
 }
 
-int get_index_up(int matrix[map_size_rows][map_size_cols], int index) {
+int get_index_up(int matrix[NUM_ROWS][NUM_COLUMNS], int index) {
     int x = get_x(index); int y = get_y(index) - 1;
     int to_return = -1;
-    if(check_point_boundaries(x, y) && matrix[x][y] != OBST)
+    if(check_point_boundaries(x, y) && matrix[x][y] != OBSTACLE)
         to_return = get_index(x, y);
     return to_return;
 }
 
-int get_index_left(int matrix[map_size_rows][map_size_cols], int index) {
+int get_index_left(int matrix[NUM_ROWS][NUM_COLUMNS], int index) {
     int x = get_x(index) + 1; int y = get_y(index);
     int to_return = -1;
-    if(check_point_boundaries(x, y) && matrix[x][y] != OBST)
+    if(check_point_boundaries(x, y) && matrix[x][y] != OBSTACLE)
         to_return = get_index(x, y);
     return to_return;
 }
 
-int get_index_right(int matrix[map_size_rows][map_size_cols], int index) {
+int get_index_right(int matrix[NUM_ROWS][NUM_COLUMNS], int index) {
     int x = get_x(index) - 1; int y = get_y(index);
     int to_return = -1;
-    if(check_point_boundaries(x, y) && matrix[x][y] != OBST)
+    if(check_point_boundaries(x, y) && matrix[x][y] != OBSTACLE)
         to_return = get_index(x, y);
     return to_return;
 }
 
-int get_index_down(int matrix[map_size_rows][map_size_cols], int index) {
+int get_index_down(int matrix[NUM_ROWS][NUM_COLUMNS], int index) {
     int x = get_x(index); int y = get_y(index) + 1;
     int to_return = -1;
-    if(check_point_boundaries(x, y) && matrix[x][y] != OBST)
+    if(check_point_boundaries(x, y) && matrix[x][y] != OBSTACLE)
         to_return = get_index(x, y);
     return to_return;
 }
@@ -306,10 +304,10 @@ void show_variant_to_go(int store_indexes[5], int checked_values[5]) {
 }
 
 
-int get_possible_indexes(int possible_indexes[D], int matrix[map_size_rows][map_size_cols], int point_index) {
+int get_possible_indexes(int possible_indexes[DIMENTION], int matrix[NUM_ROWS][NUM_COLUMNS], int point_index) {
     int not_checked_value = -4;
-    int size_v = D + 1;
-    static int checked_values[5]; //5 = D+1 to stor center point
+    int size_v = DIMENTION + 1;
+    static int checked_values[5]; //5 = DIMENTION+1 to stor center point
     static int store_indexes[5];
 
     for(int i = 0; i < size_v; i++) {
@@ -330,9 +328,9 @@ int get_possible_indexes(int possible_indexes[D], int matrix[map_size_rows][map_
     int to_return = -5;
     int minimum_value_index = -1;
     int minimum_value = 100;
-    for(int i = 0; i < D; i++) {
+    for(int i = 0; i < DIMENTION; i++) {
         possible_indexes[i] = -1;
-        if(checked_values[i] != OBST){
+        if(checked_values[i] != OBSTACLE){
             if(store_indexes[i] >= point_index && checked_values[i] == -1) {
                 possible_indexes[i] = store_indexes[i];
             } else if (store_indexes[i] < point_index && checked_values[i] == -1) {
@@ -352,10 +350,10 @@ int get_possible_indexes(int possible_indexes[D], int matrix[map_size_rows][map_
     return to_return;
 }
 
-int get_possible_indexes_path(int matrix[map_size_rows][map_size_cols], int point_index) {
+int get_possible_indexes_path(int matrix[NUM_ROWS][NUM_COLUMNS], int point_index) {
     int not_checked_value = -4;
-    int size_v = D + 1;
-    static int checked_values[5]; //5 = D+1 to stor center point
+    int size_v = DIMENTION + 1;
+    static int checked_values[5]; //5 = DIMENTION+1 to stor center point
     static int store_indexes[5];
 
     for(int i = 0; i < size_v; i++) {
@@ -376,9 +374,9 @@ int get_possible_indexes_path(int matrix[map_size_rows][map_size_cols], int poin
     int to_return = -5;
     int minimum_value_index = -1;
     int minimum_value = 100;
-    for(int i = 0; i < D; i++) {
+    for(int i = 0; i < DIMENTION; i++) {
         int next_point = get_v_by_index(matrix, point_index) - 1;
-        if(checked_values[i] > 0 && store_indexes[i] >= 0 && checked_values[i] <= next_point  && checked_values[i] != OBST){
+        if(checked_values[i] > 0 && store_indexes[i] >= 0 && checked_values[i] <= next_point  && checked_values[i] != OBSTACLE){
             if(checked_values[i] > 0 ) {
                 if(checked_values[i] < minimum_value) {
                     minimum_value = checked_values[i];
@@ -392,8 +390,8 @@ int get_possible_indexes_path(int matrix[map_size_rows][map_size_cols], int poin
 }
 
 void clean_path(void) {
-  for(int i = 0; i < map_size_rows; i++){
-        for(int j = 0; j < map_size_cols; j++){
+  for(int i = 0; i < NUM_ROWS; i++){
+        for(int j = 0; j < NUM_COLUMNS; j++){
             path[i][j] = 0;
         }
     }
@@ -401,20 +399,21 @@ void clean_path(void) {
 
 void setup_func(void) {
     ind[start_x][start_y] = start;
-    insert_obstcls(ind, OBST);
+    insert_obstcls(ind, OBSTACLE);
 }
 
 void calc_matrix_wave_func_2(void)  {
     setup_func();
     
     open_list[wave][wave_index] = 1; //1-open, 0 - closed/visited
-    update_matrix_with_ind(ind, start_index, wave);
-    
+//    update_matrix_with_ind(ind, start_index, wave);
+    ind[start_x][start_y] = wave;
+    start_index = get_index(start_x, start_y);
     //possible variants
-    int possible_indexes[D];
+    int possible_indexes[DIMENTION];
     get_possible_indexes(possible_indexes, ind, start_index);
     
-    for(int i = 0; i < D; i++) {
+    for(int i = 0; i < DIMENTION; i++) {
         if(possible_indexes[i] > 0) {
             open_list[wave + 1][wave_index++] = possible_indexes[i]; //add index to open_list
             update_matrix_with_ind(ind, possible_indexes[i], wave + 1);
@@ -435,7 +434,7 @@ void calc_matrix_wave_func_2(void)  {
             }
             get_possible_indexes(possible_indexes, ind, open_list[i][j]);
           
-            for(int l = 0; l < D; l++) {
+            for(int l = 0; l < DIMENTION; l++) {
                 if(possible_indexes[l] > 0) {
                     open_list[wave+1][wave_index++] = possible_indexes[l]; //add index to open_list
                     update_matrix_with_ind(ind, possible_indexes[l], wave+1);
@@ -461,7 +460,7 @@ void path_finding(void) {
     int value = ind[next_x][next_y];
     
     int path_found = 1;
-    int exit_path_not_found = map_size_rows * map_size_cols + 1;
+    int exit_path_not_found = NUM_ROWS * NUM_COLUMNS + 1;
     
     while(1){
         int ind_tmp = get_index(next_x, next_y);
