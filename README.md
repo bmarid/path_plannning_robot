@@ -1,8 +1,8 @@
-Ideation Report Template
-Project Name: Robot MHA
-Team: CRI project Link https://github.com/bmarid/robotics_course_2022
+
+# Project Name: Robot MHA
+## Team: CRI project Link https://github.com/bmarid/robotics_course_2022
 Mariia Bai, Andreea Stroia, Hala Albahloul
-Objective:
+## Objective:
 Programming path planning algorithm for robot. Go from start point to the goal point in 8*8 grid.
 
 # Algorithm
