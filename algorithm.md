@@ -77,6 +77,10 @@ In our modification of A*, we are using only g with cost = 1
 
 ![2_path_finding.png](https://github.com/bmarid/robotics_course_2022/blob/mari/lib/algorithm_pics/2_path_finding.png)
 
+## Test example
+
+![test_obstcale.png](https://github.com/bmarid/robotics_course_2022/blob/mari/lib/algorithm_pics/test_obstcale.png)
+
 ### General Algorithm of movment
 
 ![WhatsApp Image 2023-01-05 at 02 10 02](https://user-images.githubusercontent.com/113441374/210738268-da515aec-b926-45a1-8071-9e2a88f34c6f.jpg)
