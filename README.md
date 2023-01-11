@@ -1,3 +1,11 @@
+
+# Project Name: Robot MHA
+
+## Team: 
+Mariia Bai, Andreea Stroia, Hala Albahloul
+## Objective:
+Programming path planning algorithm for robot. Go from start point to the goal point in 8*8 grid.
+
 # Algorithm
 ## Path finding and A*
 
@@ -84,3 +92,11 @@ In our modification of A*, we are using only g with cost = 1
 ### General Algorithm of movment
 
 ![WhatsApp Image 2023-01-05 at 02 10 02](https://user-images.githubusercontent.com/113441374/210738268-da515aec-b926-45a1-8071-9e2a88f34c6f.jpg)
+
+## Video with obstacle
+
+![v3_test_obstacle.MOV](https://github.com/bmarid/robotics_course_2022/blob/mari/lib/videos/v3_test_obstacle.MOV)
+
+## Video without obstacle
+
+![v3_test_without_obstacle.MOV](https://github.com/bmarid/robotics_course_2022/blob/mari/lib/videos/v3_test_without_obstacle.MOV)
